@@ -12,8 +12,8 @@ There are 138846 different ip range in the ip-country table, if we use naive way
 1. By check the data, i found out a strong indication that if a user make purchase right after sign up account, this user will be a fraud. There are 7600 of user_id with time difference of 1 second, *100%* of them are fraud.  
 2. IP address and device ID along will be less useful in prediction model, so i tried dig into the relevant features. Consider one device be used on several users or several IPs, this device could be used as fraud. Similarly, count if one ip_address have been used for multiple users or multiple devices.
 <center>
-<img src="mul_user_dev.png" alt="dev" style="width: 150px;"/>
-<img src="mul_user_ip.png" alt="ip" style="width: 150px;"/>
+<img src="mul_user_dev.png" alt="dev" style="width: 200px;"/>
+<img src="mul_user_ip.png" alt="ip" style="width: 200px;"/>
 </center>
 
 3. All categorical variable have be transfered to continues integer.
@@ -21,12 +21,10 @@ There are 138846 different ip range in the ip-country table, if we use naive way
 
 ### Model selection
 Since large number of categorical features involved, I decide to use the non-linear tree based models, like random forest and extreme gradient booster, which can natively adapt categorical variable. The data are imbalanced, 90% of data showed negative to fraud. A random under sampling technical have been applied on training set.  
-Since the model can not perfectly predict the fraud, the model should be choose based on the the cost of false positive and false negative.  
-1. If the false positive cost are low, then model can be less precision but higher recall, in which capture as many fraud as possible.  
-2. If the false positive cost are high, then model has to be conservative, only predict fraud when possibility is high. At this time, model should be chosen by higher  precision.  
-3. If the false negative cost are high, we want less frauds be missed from our detection, so make more positive prediction, and catch as many fraud as posible. Model should be chosen by high recall.  
-4. If the false negative cost are low, we want accurately catch fraud and affect less non-fraud users, choose model by high precision.  
-5. There are two way to tuning the precision-recall trade off. One is tuning model parameters targeting higher precision/recall, another way is tuning threshold by roc curve or precision recall curve.  
+Since the model can not perfectly predict the fraud, the model should be choose based on the the cost of false positive and false negative. The metrics of precision is the true positive versus all positive prediction, in this case, precision means how many of the fraud predicted by model are true fraud. Recall is the true positive versus all true fraud, in this case means how many of the fraud have been caught by model.
+1. If the false positive cost are low, or the false negative cost are high, we want catch as many fraud as possible, hence choose model based on high recall.
+2. If the false positive cost are high, or the false negative cost are low, we want predict the fraud as precision as possible, then model has to be conservative, only predict fraud when possibility is high. At this time, model should be chosen by higher  precision.  
+3. There are two way to tuning the precision-recall trade off. One is tuning model parameters targeting higher precision/recall, another way is tuning threshold by roc curve or precision recall curve.  
 <img src="roc_xgb_undersample.png" alt="roc" style="width: 230px;"/>
 <img src="pre_rec_xgb_undersample.png" alt="roc" style="width: 230px;"/>
 
