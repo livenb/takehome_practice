@@ -29,6 +29,7 @@ Since the model can not perfectly predict the fraud, the model should be choose 
 <img src="pre_rec_xgb_undersample.png" alt="roc" style="width: 230px;"/>
 
 As shown in above roc curve and precision recall curve, the threshold are green lines, the desired ratio of precision / recall can be achieved by choose different threshold.  
+The model gives a metrics as following: f1: 0.6163, precision:0.5412, recall: 0.7156, accuracy: 0.9156, roc_auc: 0.8261
 
 ### User experience
 User experience will be affect by different model selection.
