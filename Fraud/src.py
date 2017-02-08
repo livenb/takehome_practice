@@ -38,7 +38,7 @@ def found_lower_bound(arr, tar, ip_dict):
         return None
     if arr[n/2] == tar:
         return tar
-    elif  arr[n/2] < tar:
+    elif arr[n/2] < tar:
         upper = ip_dict[arr[n/2]][0]
         if upper >= tar:
             return arr[n/2]
@@ -160,7 +160,7 @@ def plot_prec_rec(y_test, y_prob):
     fig, ax1 = plt.subplots(figsize=(10, 10))
     ax2 = ax1.twinx()
     l1, = ax1.plot(recall, precision, lw=2, color='C1',
-             label='Precision-Recall curve')
+                   label='Precision-Recall curve')
     l2, = ax2.plot(recall[:-1], thresholds, color='C2', label='Threshold')
     ax1.plot(recall, 1-recall, color='C0', linestyle='--')
     ax1.set_xlabel('Recall')
@@ -171,7 +171,7 @@ def plot_prec_rec(y_test, y_prob):
     ax1.set_xlim([-0.02, 1.02])
     ax2.set_ylim([-0.02, 1.02])
 
-    lines =[l1, l2]
+    lines = [l1, l2]
     ax1.legend(lines, [l.get_label() for l in lines], loc="lower left")
 
     plt.title('Precision-Recall')
